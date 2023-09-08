@@ -1,8 +1,11 @@
 <script>
 import AppMain from './components/AppMain.vue'
+import ContactForm from './components/ContactForm.vue'
+
 export default {
   components: {
-    AppMain
+    AppMain,
+    ContactForm
   }
 }
 </script>

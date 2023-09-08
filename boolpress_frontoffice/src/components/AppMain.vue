@@ -4,7 +4,7 @@ export default {
     name: 'AppMain',
     data() {
         return {
-            baseUrl: 'http://127.0.0.1:8000',
+            baseUrl: 'http://localhost:8000',
             project: [],
             loading: true
         }
@@ -13,7 +13,7 @@ export default {
         this.getProject();
     },
     methods: {
-        getProject() {
+        getProjects() {
             this.loading = true;
             axios.get(`${this.baseUrl}/api/projects`).then((response) => {
                 console.log(response);
@@ -33,6 +33,13 @@ export default {
         <div class="row">
             <div class="col-12">
                 <h1 class="text-center">Boolpress</h1>
+            </div>
+            <div class="cointainer">
+                <div class="row">
+                    <div class="col-12" v-for="project in projects" :key="project.id">
+                        {{ project.nome_progetto}}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
