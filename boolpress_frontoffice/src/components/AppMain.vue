@@ -5,12 +5,12 @@ export default {
     data() {
         return {
             baseUrl: 'http://localhost:8000',
-            project: [],
+            projects: [],
             loading: true
         }
     },
     created() {
-        this.getProject();
+        this.getProjects();
     },
     methods: {
         getProjects() {
@@ -18,7 +18,7 @@ export default {
             axios.get(`${this.baseUrl}/api/projects`).then((response) => {
                 console.log(response);
                 if (response.data.success) {
-                    this.project = response.data.result;
+                    this.projects = response.data.result;
                     this.loading = false;
 
                 }
@@ -28,7 +28,7 @@ export default {
 }
 </script>
 
-<template lang="">
+<template>
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -37,7 +37,7 @@ export default {
             <div class="cointainer">
                 <div class="row">
                     <div class="col-12" v-for="project in projects" :key="project.id">
-                        {{ project.nome_progetto}}
+                        {{ project.nome_progetto }}
                     </div>
                 </div>
             </div>

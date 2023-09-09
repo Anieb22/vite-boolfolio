@@ -7,6 +7,7 @@ export default {
         return {
             store,
             name: '',
+            surname: '',
             email: '',
             content: '',
             success: false,
@@ -17,13 +18,14 @@ export default {
         sendForm() {
             const data = {
                 name: this.name,
+                surname: this.surname,
                 email: this.email,
                 content: this.content
             }
 
             this.errors = {};
 
-            axios.post(`${this.store.baseUrl}/api/contacts`, data), then((response) => {
+            axios.post(`${this.store.baseUrl}/api/contacts`, data).then((response) => {
                 this.success = response.data.success;
                 if (!this.success) {
                     this.errors = response.data.errors;
@@ -32,7 +34,7 @@ export default {
                 else {
                     this.name = '';
                     this.email = '';
-                    this.cotent = '';
+                    this.content = '';
                 }
             })
         }
@@ -56,16 +58,25 @@ export default {
                     <div class="col-12">
                         <form @submit.prevent="sendForm()" class="row">
                             <div class="col-12 col-md-6">
-                                <label class="control-label">Nome e Cognome</label>
-                                <input type="text" name="name" id="name" v-model="name" placeholder="Nome e Cognome"
+                                <label class="control-label">Nome</label>
+                                <input type="text" name="name" id="name" v-model="name" placeholder="Nome"
                                     class="form-control" :class="errors.name ? 'is-invalid' : ''">
                                 <p v-for="(error, index) in errors.name" :key="index" class="text-danger">
                                     {{ error }}
                                 </p>
                             </div>
                             <div class="col-12 col-md-6">
+                                <label class="control-label">Cognome</label>
+                                <input type="text" name="surname" id="surname" v-model="surname" placeholder="Cognome"
+                                    class="form-control" :class="errors.name ? 'is-invalid' : ''">
+                                <p v-for="(error, index) in errors.name" :key="index" class="text-danger">
+                                    {{ error }}
+                                </p>
+                            </div>
+
+                            <div class="col-12">
                                 <label class="control-label">E-Mail</label>
-                                <input type="mail" name="email" id="email" v-model="email" placeholder="utente@mail.com"
+                                <input type="email" name="email" id="email" v-model="email" placeholder="utente@mail.com"
                                     class="form-control" :class="errors.email ? 'is-invalid' : ''">
                                 <p v-for="(error, index) in errors.email" :key="index" class="text-danger">
                                     {{ error }}

@@ -12,6 +12,7 @@ export default {
 
 <template>
   <div>
+    <AppMain />
     <ContactForm />
   </div>
 </template>
